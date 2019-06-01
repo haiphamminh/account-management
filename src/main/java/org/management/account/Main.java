@@ -66,7 +66,7 @@ public class Main {
                 while (scanner.hasNext()) {
                     try {
                         String[] separatedOperation = parse(scanner.nextLine(), SPACE_DELIMITER);
-                        Operation operation = Operation.valueOf(separatedOperation[0].toUpperCase());
+                        Operation operation = Operation.valueOf(separatedOperation[0]);
                         int userIdx = CEO.equalsIgnoreCase(separatedOperation[1]) ? CEO_IDX : Integer.parseInt(separatedOperation[1]);
                         switch (operation) {
                             case ADD:
