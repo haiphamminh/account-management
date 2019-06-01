@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
 
 import static org.management.account.constant.Const.CEO;
@@ -56,7 +57,8 @@ public class Main {
             // write output
             PrintWriter writer = null;
             try {
-                writer = new PrintWriter(Files.newBufferedWriter(Paths.get(OUTPUT_FILENAME), Charset.defaultCharset()), true);
+                writer = new PrintWriter(Files.newBufferedWriter(Paths.get(OUTPUT_FILENAME), Charset.defaultCharset(),
+                                                                 StandardOpenOption.TRUNCATE_EXISTING), true);
                 service.getPermissionsOfAllUsers()
                         .stream()
                         .map(perSet -> join(perSet, JOIN_DELIMITER))
@@ -67,7 +69,8 @@ public class Main {
                     try {
                         String[] separatedOperation = parse(scanner.nextLine(), SPACE_DELIMITER);
                         Operation operation = Operation.valueOf(separatedOperation[0]);
-                        int userIdx = CEO.equalsIgnoreCase(separatedOperation[1]) ? CEO_IDX : Integer.parseInt(separatedOperation[1]);
+                        int userIdx = CEO.equalsIgnoreCase(separatedOperation[1]) ? CEO_IDX : Integer.parseInt(
+                                separatedOperation[1]);
                         switch (operation) {
                             case ADD:
                                 service.addPermission(userIdx, separatedOperation[2]);
@@ -78,26 +81,29 @@ public class Main {
                             case QUERY:
                                 writer.println(join(service.getPermissions(userIdx), JOIN_DELIMITER));
                                 break;
-                            default:
-                                throw new IllegalArgumentException("The operation is invalid");
                         }
-                    } catch (IllegalArgumentException e) {
-                        System.out.println(e);
+                    } catch (Exception e) {
+                        System.out.println("The input format in the file is wrong!!!");
+                        System.exit(1);
                     }
                 }
             } catch (IOException e) {
-                System.out.println(e);
+                System.out.println("Cannot open the input file");
+                System.exit(1);
             } finally {
                 if (writer != null) {
                     writer.close();
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("The input file not found: " + e.getMessage());
+            System.out.println("The input file not found");
+            System.exit(1);
         } finally {
             if (scanner != null) {
                 scanner.close();
             }
         }
+
+        System.out.println("The result is in the output.txt");
     }
 }

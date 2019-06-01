@@ -7,5 +7,6 @@ public final class Const {
     public static final String SPACE_DELIMITER = " ";
     public static final String JOIN_DELIMITER = ", ";
 
-    private Const(){}
+    private Const() {
+    }
 }

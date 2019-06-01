@@ -22,11 +22,6 @@ public class StringUtilsTest {
         parse("", SPACE_DELIMITER);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void parseFailureWithInvalidFormatThrowException() {
-        parse("QUERY,CEO", SPACE_DELIMITER);
-    }
-
     @Test
     public void parseSuccessfully() {
         String[] separatedStr = parse("QUERY CEO", SPACE_DELIMITER);

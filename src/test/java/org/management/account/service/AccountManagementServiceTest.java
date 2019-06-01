@@ -110,6 +110,7 @@ public class AccountManagementServiceTest {
                 .forEach(idx -> addUser());
 
         List<Set<String>> permissionsPerUser = inst.getPermissionsOfAllUsers();
-        permissionsPerUser.forEach(permissionSet -> Assert.assertTrue(permissionSet.containsAll(Arrays.asList("A", "B"))));
+        permissionsPerUser.forEach(
+                permissionSet -> Assert.assertTrue(permissionSet.containsAll(Arrays.asList("A", "B"))));
     }
 }

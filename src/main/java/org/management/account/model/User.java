@@ -15,7 +15,8 @@ public class User {
     private Set<User> children = new HashSet<>();
 
     public Set<String> collectAllPermissions() {
-        return flattened().map(User::getPermissions)
+        return flattened()
+                .map(User::getPermissions)
                 .flatMap(Collection::stream)
                 .filter(permission -> permission != null && !permission.trim().isEmpty())
                 .collect(toSet());
