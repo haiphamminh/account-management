@@ -1,0 +1,22 @@
+6
+F A
+A B
+A C E
+A R
+D
+A C
+A B W
+CEO
+CEO
+1
+1
+1
+2
+ADD 2 X
+QUERY 2
+QUERY CEO
+REMOVE 2 X
+QUERY 2
+QUERY CEO
+
+
